@@ -8,8 +8,14 @@
 
     if($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["delete_id"])){
         $id = filter_input(INPUT_POST, 'delete_id', FILTER_VALIDATE_INT);
-        echo $id;
-        die();
+        
+        if($id){
+            $stmt = $pdo -> prepare("DELETE FROM alunos WHERE id_aluno = :id");
+
+            $stmt -> execute([':id' => $id]);
+        }
+        header("Location: ./");
+        exit;
     }
 ?>
 
